@@ -2,8 +2,9 @@ const shelf = document.querySelector("#shelf");
 const modal = document.querySelector(".modal");
 const modalBtn = document.querySelector(".add-btn");
 const close = document.getElementsByClassName("close-modal")[0];
+const addbookbtn = document.getElementById("submit");
 
-let myLibrary = [];
+const myLibrary = new Library();
 
 function Book(author, title, pageCount, image) {
   this.author = author;
@@ -12,36 +13,47 @@ function Book(author, title, pageCount, image) {
   this.image = image;
 }
 
-function addBookToLibrary(bookTitle) {
-  const author = prompt("Name of Author?");
-  const title = prompt("Title of Book?");
-  const pages = prompt("Number of pages?");
-  const img = prompt("Title of image file?");
-  myLibrary.push(new Book(author, title, pages, img));
-  displayBooks();
-}
+function Library() {}
 
-function displayBooks() {
+Library.prototype.myLibrary = [];
+
+Library.prototype.addBookToLibrary = function (e) {
+  e.preventDefault();
+  const author = document.getElementById("title").value;
+  const title = document.getElementById("author").value;
+  const pages = document.getElementById("pages").value;
+  const img = document.getElementById("img");
+  const image = img.value.slice(img.value.lastIndexOf("\\") + 1);
+  const isRead = document.getElementById("checkbox").value;
+  this.myLibrary.push(new Book(author, title, pages, image));
+  myLibrary.displayBooks();
+};
+
+Library.prototype.displayBooks = function () {
   shelf.innerHTML = "";
-  for (let i = 0; i < myLibrary.length; i++) {
-    const book = `
+  if (this.myLibrary.length === 0) {
+    shelf.innerHTML += "Library is empty";
+  } else {
+    for (let i = 0; i < this.myLibrary.length; i++) {
+      const book = `
     <article class="book">
-          <img src="./assets/images/${myLibrary[i].image}" alt="${myLibrary[i].image}" />
+          <img src="./assets/images/${this.myLibrary[i].image}" alt="${this.myLibrary[i].image}" />
           <div class="book-deets mt-10">
             <div>
-              <h4>${myLibrary[i].title}</h4>
-              <h5>${myLibrary[i].author}</h5>
+              <h4>${this.myLibrary[i].title}</h4>
+              <h5>${this.myLibrary[i].author}</h5>
             </div>
             <button type="button">
               <img src="./assets/icons/star-plus-outline.svg" alt="read" />
             </button>
           </div>
-          <p class="page-count">${myLibrary[i].pageCount} pages</p>
+          <p class="page-count">${this.myLibrary[i].pageCount} pages</p>
         </article>
     `;
-    shelf.innerHTML += book;
+      shelf.innerHTML += book;
+    }
   }
-}
+};
 
 modalBtn.addEventListener("click", () => {
   modal.style.display = "block";
@@ -51,4 +63,14 @@ close.addEventListener("click", () => {
   modal.style.display = "none";
 });
 
-displayBooks();
+addbookbtn.addEventListener("click", (e) => {
+  myLibrary.addBookToLibrary(e);
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
+myLibrary.displayBooks();
