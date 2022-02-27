@@ -3,22 +3,22 @@ const shl = document.querySelector("#shelf");
 let myLibrary = [
   {
     title: "Indiana Jones",
-    image: "./images/book.jpg",
+    image: "./assets/images/book.jpg",
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt molestiae totam quae ea itaque.",
   },
   {
     title: "Big Bang Jones",
-    image: "./images/book.jpg",
+    image: "./assets/images/book.jpg",
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt molestiae totam quae ea itaque.",
   },
   {
     title: "Larry Jones",
-    image: "./images/book.jpg",
+    image: "./assets/images/book.jpg",
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt molestiae totam quae ea itaque.",
   },
   {
     title: "Flora Indes",
-    image: "./images/book.jpg",
+    image: "./assets/images/book.jpg",
     desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt molestiae totam quae ea itaque.",
   },
 ];

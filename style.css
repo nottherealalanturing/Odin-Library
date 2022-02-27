@@ -18,6 +18,10 @@ main > h1 {
   width: fit-content;
 }
 
+.mt-10 {
+  margin-top: 10px;
+}
+
 .shelf {
   display: grid;
   margin: 10px;
@@ -28,17 +32,25 @@ main > h1 {
 .book {
   display: flex;
   flex-direction: column;
-  align-items: center;
   max-width: 200px;
   gap: 2px;
-  border: 1px solid black;
   margin-top: 20px;
+  box-shadow: 0 0 20px #aaa;
+  padding: 10px;
 }
 
 .book > img {
   max-width: 200px;
+  border: 1px solid black;
+  border-radius: 4px;
 }
-.book > p {
-  overflow: hidden;
-  text-align: start;
+
+.book-deets {
+  display: flex;
+  justify-content: space-between;
+}
+
+.page-count {
+  align-self: flex-end;
+  margin-top: 50px;
 }
