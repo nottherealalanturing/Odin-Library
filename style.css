@@ -46,14 +46,29 @@ main > h1 {
   border-radius: 4px;
 }
 
-.book-deets {
+.book-deets-1 {
   display: flex;
   justify-content: space-between;
 }
 
-.page-count {
-  align-self: flex-end;
-  margin-top: 50px;
+.book-deets-1 h4 {
+  font-weight: 200;
+}
+
+.book-deets-1 h5 {
+  font-weight: 200;
+  font-style: italic;
+}
+
+.book-deets-2 p {
+  font-weight: 200;
+  font-size: 12px;
+  font-style: italic;
+}
+
+.book-deets-2 {
+  display: flex;
+  justify-content: space-between;
 }
 
 .add-btn {

@@ -6,11 +6,12 @@ const addbookbtn = document.getElementById("submit");
 
 const myLibrary = new Library();
 
-function Book(author, title, pageCount, image) {
+function Book(author, title, pageCount, image, isRead) {
   this.author = author;
   this.title = title;
   this.pageCount = pageCount;
   this.image = image;
+  this.isRead = this.isRead;
 }
 
 function Library() {}
@@ -22,11 +23,12 @@ Library.prototype.addBookToLibrary = function (e) {
   const author = document.getElementById("title").value;
   const title = document.getElementById("author").value;
   const pages = document.getElementById("pages").value;
-  const img = document.getElementById("img");
-  const image = img.value.slice(img.value.lastIndexOf("\\") + 1);
+  const img = document.getElementById("images");
+  const image = img.value.slice(img.value.lastIndexOf("\\") + 1) || "book.jpg";
   const isRead = document.getElementById("checkbox").value;
-  this.myLibrary.push(new Book(author, title, pages, image));
+  this.myLibrary.push(new Book(author, title, pages, image, isRead));
   myLibrary.displayBooks();
+  closeModal();
 };
 
 Library.prototype.displayBooks = function () {
@@ -36,35 +38,58 @@ Library.prototype.displayBooks = function () {
   } else {
     for (let i = 0; i < this.myLibrary.length; i++) {
       const book = `
-    <article class="book">
+        <article class="book" data-title="${this.myLibrary[i].title}">
           <img src="./assets/images/${this.myLibrary[i].image}" alt="${this.myLibrary[i].image}" />
-          <div class="book-deets mt-10">
+          <div class="book-deets-1 mt-10">
             <div>
               <h4>${this.myLibrary[i].title}</h4>
               <h5>${this.myLibrary[i].author}</h5>
             </div>
-            <button type="button">
-              <img src="./assets/icons/star-plus-outline.svg" alt="read" />
-            </button>
           </div>
-          <p class="page-count">${this.myLibrary[i].pageCount} pages</p>
+          <div class="book-deets-2 mt-10">
+          <a href="#" >
+              <img src="./assets/icons/check.svg" alt="read" />
+           </a>
+           <a href="#" id="deleteBtn">
+              <img src="./assets/icons/delete.svg" alt="delete" />
+           </a>
+          <p>${this.myLibrary[i].pageCount} pages</p>
+          </div>
         </article>
     `;
+      const deleteBtn = document.querySelector(`[data-title="${this.title}"`);
+
       shelf.innerHTML += book;
     }
   }
 };
+
+Library.prototype.deleteBook = function (title) {
+  myLibrary = myLibrary.filter((item, index) => {
+    item.title !== title;
+  });
+  myLibrary.displayBooks();
+};
+
+function closeModal() {
+  modal.style.display = "none";
+}
 
 modalBtn.addEventListener("click", () => {
   modal.style.display = "block";
 });
 
 close.addEventListener("click", () => {
-  modal.style.display = "none";
+  closeModal();
 });
 
 addbookbtn.addEventListener("click", (e) => {
   myLibrary.addBookToLibrary(e);
+});
+
+deleteBtn.addEventListener("click", (e) => {
+  console.log(e);
+  /* myLibrary.deleteBook(); */
 });
 
 window.addEventListener("click", (e) => {
