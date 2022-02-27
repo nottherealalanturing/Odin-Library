@@ -10,46 +10,26 @@
   <body>
     <main>
       <h1>Library</h1>
-      <div class="shelf" id="shelf">
-        <article class="book">
-          <img src="./assets/images/book.jpg" alt="Harry Potter" />
-          <div class="book-deets mt-10">
-            <div>
-              <h4>Harry Potter</h4>
-              <h5>Christopher Nolan</h5>
-            </div>
-            <button type="button">
-              <img src="./assets/icons/star-plus-outline.svg" alt="read" />
-            </button>
-          </div>
-          <p class="page-count">400 pages</p>
-        </article>
-        <!-- 
-        <article class="book">
-          <img src="./images/book.jpg" alt="Harry Potter" />
-          <h4>Harry Potter</h4>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-            molestiae totam quae ea itaque.
-          </p>
-        </article>
-        <article class="book">
-          <img src="./images/book.jpg" alt="Harry Potter" />
-          <h4>Harry Potter</h4>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-            molestiae totam quae ea itaque.
-          </p>
-        </article>
-        <article class="book">
-          <img src="./images/book.jpg" alt="Harry Potter" />
-          <h4>Harry Potter</h4>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-            molestiae totam quae ea itaque.
-          </p>
-        </article> -->
+      <div class="modal">
+        <div class="modal-content">
+          <span class="close-modal">&times;</span>
+          <form action="#" method="post">
+            <fieldset>
+              <legend>Add Book</legend>
+              <label for="title">Title:</label>
+              <input type="text" id="title" name="title" /><br />
+              <label for="author">Author:</label>
+              <input type="text" id="author" name="author" /><br />
+              <label for="pages">Pages:</label>
+              <input type="text" id="pages" name="pages" /><br />
+              <label for="checkbox">Read?</label>
+              <input type="checkbox" id="checkbox" name="checkbox" />
+            </fieldset>
+          </form>
+        </div>
       </div>
+      <div class="shelf" id="shelf"></div>
+      <button type="button" class="add-btn">Add New Book</button>
     </main>
   </body>
 </html>

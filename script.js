@@ -1,51 +1,54 @@
-const shl = document.querySelector("#shelf");
+const shelf = document.querySelector("#shelf");
+const modal = document.querySelector(".modal");
+const modalBtn = document.querySelector(".add-btn");
+const close = document.getElementsByClassName("close-modal")[0];
 
-let myLibrary = [
-  {
-    title: "Indiana Jones",
-    image: "./assets/images/book.jpg",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt molestiae totam quae ea itaque.",
-  },
-  {
-    title: "Big Bang Jones",
-    image: "./assets/images/book.jpg",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt molestiae totam quae ea itaque.",
-  },
-  {
-    title: "Larry Jones",
-    image: "./assets/images/book.jpg",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt molestiae totam quae ea itaque.",
-  },
-  {
-    title: "Flora Indes",
-    image: "./assets/images/book.jpg",
-    desc: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt molestiae totam quae ea itaque.",
-  },
-];
+let myLibrary = [];
 
-function Book(bookTitle) {
-  this.bookTitle = bookTitle;
+function Book(author, title, pageCount, image) {
+  this.author = author;
+  this.title = title;
+  this.pageCount = pageCount;
+  this.image = image;
 }
 
 function addBookToLibrary(bookTitle) {
-  myLibrary.push(new Book(bookTitle));
+  const author = prompt("Name of Author?");
+  const title = prompt("Title of Book?");
+  const pages = prompt("Number of pages?");
+  const img = prompt("Title of image file?");
+  myLibrary.push(new Book(author, title, pages, img));
+  displayBooks();
 }
 
 function displayBooks() {
+  shelf.innerHTML = "";
   for (let i = 0; i < myLibrary.length; i++) {
-    const book = document.createElement("article");
-    book.setAttribute("class", "book");
-    const bookTitle = document.createElement("h4");
-    const bookImage = document.createElement("img");
-    const bookDesc = document.createElement("p");
-    bookTitle.innerText = myLibrary[i].title;
-    bookImage.setAttribute("src", myLibrary[i].image);
-    bookDesc.innerText = myLibrary[i].desc;
-    book.appendChild(bookImage);
-    book.appendChild(bookTitle);
-    book.appendChild(bookDesc);
-    shl.appendChild(book);
+    const book = `
+    <article class="book">
+          <img src="./assets/images/${myLibrary[i].image}" alt="${myLibrary[i].image}" />
+          <div class="book-deets mt-10">
+            <div>
+              <h4>${myLibrary[i].title}</h4>
+              <h5>${myLibrary[i].author}</h5>
+            </div>
+            <button type="button">
+              <img src="./assets/icons/star-plus-outline.svg" alt="read" />
+            </button>
+          </div>
+          <p class="page-count">${myLibrary[i].pageCount} pages</p>
+        </article>
+    `;
+    shelf.innerHTML += book;
   }
 }
+
+modalBtn.addEventListener("click", () => {
+  modal.style.display = "block";
+});
+
+close.addEventListener("click", () => {
+  modal.style.display = "none";
+});
 
 displayBooks();
